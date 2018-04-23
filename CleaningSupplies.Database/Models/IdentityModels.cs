@@ -3,8 +3,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Web;
+using System.Linq;
 
-namespace Cleaningsupplies.Web.Models
+namespace CleaningSupplies.Database.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
@@ -16,6 +19,8 @@ namespace Cleaningsupplies.Web.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -29,5 +34,11 @@ namespace Cleaningsupplies.Web.Models
         {
             return new ApplicationDbContext();
         }
+        //Setup the Database Tables
+        public DbSet<Master> Master { get; set; }
+        public DbSet<Usage> Usage { get; set; }
+
+        
+
     }
 }

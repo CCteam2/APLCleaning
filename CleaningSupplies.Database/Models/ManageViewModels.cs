@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace Cleaningsupplies.Web.Models
+namespace CleaningSupplies.Database.Models
 {
     public class IndexViewModel
     {
