@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Cleaningsupplies.Web.Models;
+using CleaningSupplies.Database.Models;
 
 namespace Cleaningsupplies.Web.Controllers
 {

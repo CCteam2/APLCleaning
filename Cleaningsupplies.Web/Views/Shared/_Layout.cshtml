@@ -11,24 +11,20 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div>
-                    <img src="~/Images/friendship-apl-logo.png"/>
-                </div>
-                <br /><br />
-                @Html.ActionLink("APL", "Index", "Home", new { area = "APL" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("APL Cleaning Supplies", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Home |", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Master |", "Index", "Master")</li>
+                    <li>@Html.ActionLink("Usage |", "Index", "Usage")</li>
+                    <li>@Html.ActionLink("About |", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")

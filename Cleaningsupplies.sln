@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cleaningsupplies.Web", "Cle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cleaningsupplies.Web.Tests", "Cleaningsupplies.Web.Tests\Cleaningsupplies.Web.Tests.csproj", "{73C399F7-CA17-4F55-B918-59E26868F577}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningSupplies.Database", "CleaningSupplies.Database\CleaningSupplies.Database.csproj", "{CE6856D6-3302-4069-8E6E-16C72B27EAAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{73C399F7-CA17-4F55-B918-59E26868F577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73C399F7-CA17-4F55-B918-59E26868F577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73C399F7-CA17-4F55-B918-59E26868F577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE6856D6-3302-4069-8E6E-16C72B27EAAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE6856D6-3302-4069-8E6E-16C72B27EAAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE6856D6-3302-4069-8E6E-16C72B27EAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE6856D6-3302-4069-8E6E-16C72B27EAAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Cleaningsupplies.Web.Models;
+using CleaningSupplies.Database;
+using CleaningSupplies.Database.Models;
 
 namespace Cleaningsupplies.Web
 {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cleaningsupplies.Web.Models
+namespace CleaningSupplies.Database.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
