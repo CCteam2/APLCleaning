@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cleaningsupplies.Web", "..\repos\Cleaningsupplies\Cleaningsupplies.Web\Cleaningsupplies.Web.csproj", "{33D221AD-FA9C-4778-95F7-9AE2A8050E30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cleaningsupplies.Web", "Cleaningsupplies.Web\Cleaningsupplies.Web.csproj", "{33D221AD-FA9C-4778-95F7-9AE2A8050E30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cleaningsupplies.Web.Tests", "..\repos\Cleaningsupplies\Cleaningsupplies.Web.Tests\Cleaningsupplies.Web.Tests.csproj", "{73C399F7-CA17-4F55-B918-59E26868F577}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cleaningsupplies.Web.Tests", "Cleaningsupplies.Web.Tests\Cleaningsupplies.Web.Tests.csproj", "{73C399F7-CA17-4F55-B918-59E26868F577}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
