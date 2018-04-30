@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Cleaningsupplies.Web.Controllers
 {
+    [Authorize]
     public class MasterController : Controller
     {
 
@@ -54,10 +55,10 @@ namespace Cleaningsupplies.Web.Controllers
             ModelState["CreatedById"].Errors.Clear();
             if (ModelState.IsValid)
             {
-                 master.CreatedById = db.Users.Find(User.Identity.GetUserId());  //Requires "using Microsoft.AspNet.Identity;"
-                master.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                 master.CreatedByDateTime = DateTimeOffset.UtcNow;
-                master.ModifiedByDatetime = DateTimeOffset.UtcNow;
+                master.CreatedById = db.Users.Find(User.Identity.GetUserId()); //Requires "using Microsoft.AspNet.Identity;"
+                ////master.ModifiedById = db.Users.Find(User.Identity.GetUserId());
+                master.CreatedByDateTime = DateTime.Now;
+                master.ModifiedByDatetime = DateTime.Now;
                 db.Master.Add(master);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -94,7 +95,8 @@ namespace Cleaningsupplies.Web.Controllers
             {
                 master.CreatedById = db.Users.Find(User.Identity.GetUserId());  //Requires "using Microsoft.AspNet.Identity;"
                 master.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                master.ModifiedByDatetime = DateTimeOffset.UtcNow;
+                master.ModifiedByDatetime = DateTime.Now;
+                master.CreatedByDateTime = DateTime.Now;
                 
                 db.Entry(master).State = EntityState.Modified;
                 db.SaveChanges();

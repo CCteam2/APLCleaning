@@ -16,7 +16,7 @@ namespace CleaningSupplies.Database.Models
         [Required]
         [Display(Name = "Quantity In Stock")]
         public int QuantityInStock { get; set; }
-        [Display(Name = "Is Deleted")]
+        [Display(Name = "Disconnected")]
         public bool IsDeleted { get; set; }
 
 

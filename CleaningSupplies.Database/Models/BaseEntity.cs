@@ -10,14 +10,16 @@ namespace CleaningSupplies.Database.Models
     public class BaseEntity
     {
         [Required]
+        [Display(Name = "Created By")]
         public virtual ApplicationUser CreatedById { get; set; }
         //[Required]
         [Display(Name = "Created By DateTime")]
-        public DateTimeOffset CreatedByDateTime { get; set; }
+        public DateTime CreatedByDateTime { get; set; }
         //[Required]
+        [Display(Name = "Modified By")]
         public virtual ApplicationUser ModifiedById { get; set; }
         //[Required]
         [Display(Name = "Modified By Datetime")]
-        public DateTimeOffset ModifiedByDatetime { get; set; }
+        public DateTime ModifiedByDatetime { get; set; }
     }
 }

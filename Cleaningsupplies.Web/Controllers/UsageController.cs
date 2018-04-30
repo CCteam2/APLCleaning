@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity;
 
 namespace Cleaningsupplies.Web.Controllers
 {
+    [Authorize]
+
     public class UsageController : Controller
     {
 

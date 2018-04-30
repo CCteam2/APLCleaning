@@ -11,6 +11,13 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
 
@@ -26,14 +33,14 @@
             @Html.DisplayFor(model => model.QuantityInStock)
         </dd>
 
+
         <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
+            @Html.DisplayNameFor(model => model.CreatedById)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
+            @Html.DisplayFor(model => model.CreatedById.Email)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.CreatedByDateTime)
         </dt>
@@ -42,6 +49,13 @@
             @Html.DisplayFor(model => model.CreatedByDateTime)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedById)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedById.Email)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ModifiedByDatetime)
         </dt>
