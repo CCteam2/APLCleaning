@@ -4025,7 +4025,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   z-index: 1000;
-  min-height: 250px;
+  min-height: 50px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
@@ -4501,8 +4501,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #ffffff;
-  border-color: #ffffff;
+  background-color: #000;
+  border-color: #000;
 }
 
 .navbar-inverse .navbar-brand {

@@ -20,12 +20,14 @@
         <th>
             @Html.DisplayNameFor(model => model.IsDeleted)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.CreatedByDateTime)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedByDatetime)
-        </th>*@
+        </th>
+
+
         <th></th>
     </tr>
 
@@ -47,9 +49,15 @@
             @Html.DisplayFor(modelItem => item.ModifiedByDatetime)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.HiddenFor(modelItem => item.CreatedById)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.ModifiedById)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
         </td>
     </tr>
 }

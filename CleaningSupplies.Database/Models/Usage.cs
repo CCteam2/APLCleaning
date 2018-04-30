@@ -17,5 +17,7 @@ namespace CleaningSupplies.Database.Models
         [Display(Name = "Quantity Modified")]
         public int Quantity_modified { get; set; }
         public virtual Master GetMasterT { get; set; }
+
+
     }
 }
