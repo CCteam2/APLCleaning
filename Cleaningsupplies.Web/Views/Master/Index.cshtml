@@ -12,44 +12,54 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.QuantityInStock)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </th>
+
         @*<th>
             @Html.DisplayNameFor(model => model.CreatedByDateTime)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedByDatetime)
         </th>*@
+
+
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.QuantityInStock)
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.IsDeleted)
+            @Html.HiddenFor(modelItem => item.CreatedByDateTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedByDateTime)
+            @Html.HiddenFor(modelItem => item.ModifiedByDatetime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ModifiedByDatetime)
+            @Html.HiddenFor(modelItem => item.CreatedById.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.HiddenFor(modelItem => item.ModifiedById.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) 
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
         </td>
     </tr>
 }
