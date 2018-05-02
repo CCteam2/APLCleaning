@@ -209,8 +209,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\aboutHoursDog.png" />
+    <Content Include="Images\aboutRescueCat.png" />
+    <Content Include="Images\apl_bldg.jpg" />
     <Content Include="Images\Chihuahua2-543x304.jpg" />
     <Content Include="Images\friendship-apl-logo.png" />
+    <Content Include="Images\involvedClassesDog.png" />
     <Content Include="Images\StaffVolunteers.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
