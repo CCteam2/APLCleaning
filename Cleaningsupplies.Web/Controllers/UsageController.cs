@@ -64,8 +64,8 @@ namespace Cleaningsupplies.Web.Controllers
             {
                 Usage.CreatedById = db.Users.Find(User.Identity.GetUserId());  //Requires "using Microsoft.AspNet.Identity;"
                 Usage.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                Usage.CreatedByDateTime = DateTimeOffset.UtcNow;
-                Usage.ModifiedByDatetime = DateTimeOffset.UtcNow;
+                Usage.CreatedByDateTime = DateTime.UtcNow;
+                Usage.ModifiedByDatetime = DateTime.UtcNow;
                 db.Usage.Add(Usage);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -102,7 +102,7 @@ namespace Cleaningsupplies.Web.Controllers
             {
                 Usage.CreatedById = db.Users.Find(User.Identity.GetUserId());  //Requires "using Microsoft.AspNet.Identity;"
                 Usage.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                Usage.ModifiedByDatetime = DateTimeOffset.UtcNow;
+                Usage.ModifiedByDatetime = DateTime.UtcNow;
 
                 db.Entry(Usage).State = EntityState.Modified;
                 db.SaveChanges();
