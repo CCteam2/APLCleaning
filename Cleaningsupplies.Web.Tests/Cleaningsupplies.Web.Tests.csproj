@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework">
       <HintPath>..\packages\MSTest.TestFramework.1.1.17\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
@@ -99,6 +105,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cleaningsupplies.Business\Cleaningsupplies.Business.csproj">
+      <Project>{ac701861-62fc-4527-b434-5715ec20655e}</Project>
+      <Name>Cleaningsupplies.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CleaningSupplies.Database\CleaningSupplies.Database.csproj">
+      <Project>{ce6856d6-3302-4069-8e6e-16c72b27eaac}</Project>
+      <Name>CleaningSupplies.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Cleaningsupplies.Web\Cleaningsupplies.Web.csproj">
       <Project>{33D221AD-FA9C-4778-95F7-9AE2A8050E30}</Project>
       <Name>Cleaningsupplies.Web</Name>
