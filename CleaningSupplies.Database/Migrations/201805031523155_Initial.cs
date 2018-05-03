@@ -99,7 +99,7 @@ namespace CleaningSupplies.Database.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Item = c.String(nullable: false),
-                        QuantityInStock = c.Int(nullable: false),
+                        Quantity_modified = c.Int(nullable: false),
                         CreatedByDateTime = c.DateTime(nullable: false),
                         ModifiedByDatetime = c.DateTime(),
                         CreatedById_Id = c.String(nullable: false, maxLength: 128),

@@ -13,7 +13,7 @@ namespace CleaningSupplies.Database.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201805031437231_Initial"; }
+            get { return "201805031523155_Initial"; }
         }
         
         string IMigrationMetadata.Source
