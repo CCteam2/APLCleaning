@@ -1,5 +1,4 @@
-﻿@model List<CleaningSupplies.Database.Models.Master>
-@*@model List<CleaningSupplies.Database.Models.Usage>*@
+﻿@model IEnumerable<CleaningSupplies.Database.Models.Master>
 @{
     /**/
 
@@ -90,7 +89,7 @@
             tr.find('#Quantity_modified').val("0");
         });
 
-        //add button click
+        //increase quantity button click
         $('.add-qty').on('click', function () {
             var tr = $(this).parents('tr:first');
             var ID = tr.find("#ID").text();
@@ -99,7 +98,7 @@
             var Quantity_modified = tr.find("#Quantity_modified").val();
             tr.find('.edit-mode, .display-mode').toggle();
 
-            var UsageModel =
+            var UpdateUsage =
                 {
                     "ID": ID,
                     "Description": Description,
@@ -107,8 +106,8 @@
                     "Quantity_modified": Quantity_modified
                 };
             $.ajax({
-                url: '/Usage/Create/',
-                data: JSON.stringify(UsageModel),
+                url: '/Usage/JSONUpdate/',
+                data: JSON.stringify(UpdateUsage),
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
@@ -119,25 +118,26 @@
             tr.find('#Quantity_modified').val("0");
         });
 
-        // remove button click
+        // decrease quantity button click
         $('.remove-qty').on('click', function () {
             var tr = $(this).parents('tr:first');
             var ID = tr.find("#ID").text();
             var Description = tr.find("#lblDescription").text();
             var QuantityInStock = tr.find("#lblQuantityInStock").text();
             var Quantity_modified = tr.find("#Quantity_modified").val();
+            Quantity_modified = Quantity_modified * -1;
             tr.find('.edit-mode, .display-mode').toggle();
 
-            var UsageModel =
+            var UpdateUsage =
                 {
                     "ID": ID,
                     "Description": Description,
-                    //"QuantityInStock": QuantityInStock,
+                   // "QuantityInStock": QuantityInStock,
                     "Quantity_modified": Quantity_modified
                 };
             $.ajax({
-                url: '/Usage/DecreaseQtyInStock/',
-                data: JSON.stringify(UsageModel),
+                url: '/Usage/JSONUpdate/',
+                data: JSON.stringify(UpdateUsage),
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
@@ -154,41 +154,39 @@
 
 
 @{
-    var grid = new WebGrid(Model, rowsPerPage: 8, canPage: true, canSort: true);
+    var grid = new WebGrid(Model, rowsPerPage: 7, canPage: true, canSort: true);
 }
 
 
 <div id="gridContent" style=" padding:20px; ">
     @grid.GetHtml(
-        tableStyle: "webgrid-table",
-        headerStyle: "webgrid-header",
-        footerStyle: "webgrid-footer",
-        alternatingRowStyle: "webgrid-alternating-row",
-        selectedRowStyle: "webgrid-selected-row",
-        rowStyle: "webgrid-row-style",
-        mode: WebGridPagerModes.All,
-        firstText: "<< First",
-        previousText: " < Previous",
-        nextText: "Next >",
-        lastText: "Last >>",
-        columns:
-            grid.Columns(
-            grid.Column("ID", "ID", format: @<text>
-                <span><label id="ID">@item.ID</label></span>
-                </text>, style: "col1Width", canSort: false),
-            grid.Column("Description", "Description", format: @<text>
-                <span><label id="lblDescription">@item.Description</label></span>
-                </text>, style: "col2Width", canSort: true),
-            grid.Column("QuantityInStock", "Qty In Stock", format: @<text>
-                <span><label id="lblQuanityInStock">@item.QuantityInStock</label></span>
-                </text>, style: "col2Width", canSort: false),
-            grid.Column("Action", format: @<text>
-                <input type="text" id="Quantity_modified" class="edit-mode" value="0" size="3" />
-                <button class="edit-item display-mode">Edit</button>
-                <button class="cancel-item edit-mode">Cancel</button>
-                <button class="add-qty edit-mode">Add</button>
-                <button class="remove-qty edit-mode">Remove</button>
-                </text>, style: "col3Width", canSort: false)
-    ))
+                                        tableStyle: "webgrid-table",
+                                        headerStyle: "webgrid-header",
+                                        footerStyle: "webgrid-footer",
+                                        alternatingRowStyle: "webgrid-alternating-row",
+                                        selectedRowStyle: "webgrid-selected-row",
+                                        rowStyle: "webgrid-row-style",
+                                        mode: WebGridPagerModes.All,
+                                        columns:
+                                    grid.Columns(
+                                        grid.Column("ID", "ID", format: @<text>
+                                            <span><label id="ID">@item.ID</label></span>
+                                        </text>, style: "col1Width", canSort: false),
+                                                                                grid.Column("Description", "Description", format: @<text>
+                                                                                    <span><label id="lblDescription">@item.Description</label></span>
+                                                                                </text>, style: "col2Width", canSort: true),
+                                                                                                                         grid.Column("QuantityInStock", "Qty In Stock", format: @<text>
+                                                                                                                            <span><label id="lblQuanityInStock">@item.QuantityInStock</label></span>
+                                                                                                                        </text>, style: "col2Width", canSort: false),
+                                                                                                                                                                 grid.Column("Action", format: @<text>
+                                                                                                                                                                    <input type="text" id="Quantity_modified" class="edit-mode" value="0" size="3" />
+                                                                                                                                                                    <button class="edit-item display-mode">Edit</button>
+                                                                                                                                                                    <button class="cancel-item edit-mode">Cancel</button>
+                                                                                                                                                                    <button class="add-qty edit-mode">Add</button>
+                                                                                                                                                                    <button class="remove-qty edit-mode">Remove</button>
+                                                                                                                                                                </text>, style: "col3Width", canSort: false)
+                                                                                                                                                                                                     ))
 </div>
-
+<div>
+    @Html.ActionLink("Back to Products", "Index", "Master")
+</div>
