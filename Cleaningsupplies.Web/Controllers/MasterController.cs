@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CleaningSupplies.Database.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace Cleaningsupplies.Web.Controllers
 {
@@ -47,10 +49,13 @@ namespace Cleaningsupplies.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,IsDeleted,CreatedByDateTime,ModifiedByDatetime")] Master master)
+        public ActionResult Create([Bind(Include = "ID,Description,QuantityInStock,IsDeleted,CreatedByDateTime,ModifiedByDatetime")] Master master)
         {
+            ModelState["CreatedById"].Errors.Clear();
             if (ModelState.IsValid)
             {
+                master.CreatedById = db.Users.Find(User.Identity.GetUserId()); //Requires "using Microsoft.AspNet.Identity;"
+                master.CreatedByDateTime = DateTime.Now;
                 db.Master.Add(master);
                 db.SaveChanges();
                 return RedirectToAction("Index");
