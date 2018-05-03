@@ -7,6 +7,8 @@ using Cleaningsupplies.Web.Models;
 
 namespace EditableWebgrid.Controllers
 {
+    [Authorize]
+
     public class UsageController : Controller
     {
         //

@@ -5,6 +5,7 @@
 }
 
 <style type="text/css">
+
     .edit-mode {
     }
 
@@ -67,7 +68,7 @@
     }
 
     .col3Width {
-        width: 250px;
+        width: 200px;
     }
 </style>
 
@@ -82,7 +83,7 @@
             var tr = $(this).parents('tr:first');
             tr.find('.edit-mode, .display-mode').toggle();
             // reset user input to 0
-            tr.find('#UserInput').val("0");
+            //tr.find('#UserInput').val("0");
         });
 
         //increase quantity button click
@@ -91,23 +92,23 @@
             var ItemID = tr.find("#ItemID").val();
             var Desc = tr.find("#Desc").val();
             var Qty = tr.find("#Qty").val();
-            var UserQty = tr.find("#UserQty").val();
+            //var UserQty = tr.find("#UserQty").val();
             tr.find("#lblDesc").text(Desc);
             tr.find("#lblQty").text(Qty);
             tr.find('.edit-mode, .display-mode').toggle();
             // reset user input to 0
-            tr.find('#UserInput').val("0");
+            //tr.find('#UserInput').val("0");
             var CleaningUsageModel =
                 {
                     "ID": ItemID,
                     "Description": Desc,
-                    "Qty Modified": Qty,
-                    "User Qty": UserQty
+                    "Qty Modified": Qty
+                    //"User Qty": UserQty
                     //"User": User,
                     //"Update": Date
                 };
             $.ajax({
-                url: '/CleaningUsage/IncreaseQty/',
+                url: '/Usage/IncreaseQty/',
                 data: JSON.stringify(CleaningUsageModel),
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
@@ -124,23 +125,23 @@
             var ItemID = tr.find("#ItemID").val();
             var Desc = tr.find("#Desc").val();
             var Qty = tr.find("#Qty").val();
-            var UserQty = tr.find("#UserQty").val();
+            //var UserQty = tr.find("#UserQty").val();
             tr.find("#lblDesc").text(Desc);
             tr.find("#lblQty").text(Qty);
             tr.find('.edit-mode, .display-mode').toggle();
             // reset user input to 0
-            tr.find('#UserInput').val("0");
+            //tr.find('#UserInput').val("0");
             var CleaningUsageModel =
                 {
                     "ID": ItemID,
                     "Description": Desc,
-                    "Qty Modified": Qty,
-                    "User Qty": UserQty
+                    "Qty Modified": Qty
+                    //"User Qty": UserQty
                     //"User": User,
                     //"Update": Date
                 };
             $.ajax({
-                url: '/CleaningUsage/DecreaseQty/',
+                url: '/Usage/DecreaseQty/',
                 data: JSON.stringify(CleaningUsageModel),
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
@@ -161,28 +162,34 @@
 
 <div id="gridContent" style=" padding:20px; ">
     @grid.GetHtml(
-                        tableStyle: "webgrid-table",
-                        headerStyle: "webgrid-header",
-                        footerStyle: "webgrid-footer",
-                        alternatingRowStyle: "webgrid-alternating-row",
-                        selectedRowStyle: "webgrid-selected-row",
-                        rowStyle: "webgrid-row-style",
-                        mode: WebGridPagerModes.All,
-         columns:
-                        grid.Columns(
-                        @*grid.Column("ID", format: @<text>  <span class="display-mode">@item.ID </span> <label id="ItemID" class="edit-mode">@item.ID</label> </text>, style: "col2Width"),*@
-                        grid.Column("Description", "Description", format: @<text>
-                            <span> <label id="lblDesc">@item.Description</label></span>
-                        </text>, style: "col2Width"),
-                                grid.Column("Qty", "Qty Modified", format: @<text>
-                                    <span> <label id="lblQty">@item.Qty</label> </span>
+    tableStyle: "webgrid-table",
+    headerStyle: "webgrid-header",
+    footerStyle: "webgrid-footer",
+                                alternatingRowStyle: "webgrid-alternating-row",
+                                selectedRowStyle: "webgrid-selected-row",
+                                rowStyle: "webgrid-row-style",
+                                mode: WebGridPagerModes.All,
+                 columns:
+                                grid.Columns(
+                                @*grid.Column("ID", format: @<text>  <span class="display-mode">@item.ID </span> <label id="ItemID" class="edit-mode">@item.ID</label> </text>, style: "col2Width"),*@
+                                grid.Column("Description", "Description", format: @<text>
+                                    <span> <label id="lblDesc">@item.Description</label></span>
                                 </text>, style: "col2Width"),
-                                        grid.Column("Action", format: @<text>
-                                            <input type="text" id="UserInput" class="edit-mode" value="0" size="3" />
-                                            <button class="edit-item display-mode">Edit</button>
-                                            <button class="cancel-item edit-mode">Cancel</button>
-                                            <button class="increase-qty edit-mode">(+) Qty</button>
-                                            <button class="decrease-qty edit-mode">(-) Qty</button>
-                                        </text>, style: "col3Width", canSort: false)
-                                           ))
+                                                        @*grid.Column("Qty", "Qty Modified", format: @<text>
+                                                                <span> <label id="lblQty">@item.Qty</label> </span>
+                                                            </text>, style: "col2Width"),*@
+                                                        grid.Column("Qty", "Qty Modified", format: @<text>
+                                                            <span class="display-mode">
+                                                                <label id="lblQty">@item.Qty</label>
+                                                            </span>
+                                                            <input type="text" id="Qty" value="@item.Qty" class="edit-mode" />
+                                                        </text>, style: "col2Width"),
+                                                                               grid.Column("Action", format: @<text>
+                                                                                @*<input type="text" id="UserInput" class="edit-mode" value="0" size="3" />*@
+                                                                                <button class="edit-item display-mode">Edit</button>
+                                                                                <button class="cancel-item edit-mode">Cancel</button>
+                                                                                <button class="increase-qty edit-mode">Add</button>
+                                                                                <button class="decrease-qty edit-mode">Remove</button>
+                                                                            </text>, style: "col3Width", canSort: false)
+                                                                                            ))
 </div>

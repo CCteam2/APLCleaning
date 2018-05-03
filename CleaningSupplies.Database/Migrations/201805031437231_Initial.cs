@@ -13,15 +13,14 @@ namespace CleaningSupplies.Database.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Description = c.String(nullable: false),
-                        QuantityInStock = c.Int(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
-                        CreatedByDateTime = c.DateTimeOffset(nullable: false, precision: 7),
-                        ModifiedByDatetime = c.DateTimeOffset(nullable: false, precision: 7),
-                        CreatedById_Id = c.String(maxLength: 128),
+                        CreatedByDateTime = c.DateTime(nullable: false),
+                        ModifiedByDatetime = c.DateTime(),
+                        CreatedById_Id = c.String(nullable: false, maxLength: 128),
                         ModifiedById_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.AspNetUsers", t => t.CreatedById_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.CreatedById_Id, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.ModifiedById_Id)
                 .Index(t => t.CreatedById_Id)
                 .Index(t => t.ModifiedById_Id);
@@ -100,15 +99,15 @@ namespace CleaningSupplies.Database.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Item = c.String(nullable: false),
-                        Quantity_modified = c.Int(nullable: false),
-                        CreatedByDateTime = c.DateTimeOffset(nullable: false, precision: 7),
-                        ModifiedByDatetime = c.DateTimeOffset(nullable: false, precision: 7),
-                        CreatedById_Id = c.String(maxLength: 128),
+                        QuantityInStock = c.Int(nullable: false),
+                        CreatedByDateTime = c.DateTime(nullable: false),
+                        ModifiedByDatetime = c.DateTime(),
+                        CreatedById_Id = c.String(nullable: false, maxLength: 128),
                         GetMasterT_ID = c.Int(),
                         ModifiedById_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.AspNetUsers", t => t.CreatedById_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.CreatedById_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Masters", t => t.GetMasterT_ID)
                 .ForeignKey("dbo.AspNetUsers", t => t.ModifiedById_Id)
                 .Index(t => t.CreatedById_Id)

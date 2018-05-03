@@ -13,9 +13,10 @@ namespace CleaningSupplies.Database.Models
         public int ID { get; set; }
         [Required]
         public string Item { get; set; }
-        [Required]
-        [Display(Name = "Quantity Modified")]
-        public int Quantity_modified { get; set; }
         public virtual Master GetMasterT { get; set; }
+        [Required]
+        [Display(Name = "Quantity In Stock")]
+        public int QuantityInStock { get; set; }
+
     }
 }

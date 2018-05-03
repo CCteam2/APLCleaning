@@ -10,17 +10,17 @@ using CleaningSupplies.Database.Models;
 
 namespace Cleaningsupplies.Web.Controllers
 {
-    public class MastersController : Controller
+    public class MasterController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Masters
+        // GET: Master
         public ActionResult Index()
         {
             return View(db.Master.ToList());
         }
 
-        // GET: Masters/Details/5
+        // GET: Master/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,18 +35,18 @@ namespace Cleaningsupplies.Web.Controllers
             return View(master);
         }
 
-        // GET: Masters/Create
+        // GET: Master/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Masters/Create
+        // POST: Master/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,QuantityInStock,IsDeleted,CreatedByDateTime,ModifiedByDatetime")] Master master)
+        public ActionResult Create([Bind(Include = "ID,Description,IsDeleted,CreatedByDateTime,ModifiedByDatetime")] Master master)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace Cleaningsupplies.Web.Controllers
             return View(master);
         }
 
-        // GET: Masters/Edit/5
+        // GET: Master/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,12 +73,12 @@ namespace Cleaningsupplies.Web.Controllers
             return View(master);
         }
 
-        // POST: Masters/Edit/5
+        // POST: Master/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Description,QuantityInStock,IsDeleted,CreatedByDateTime,ModifiedByDatetime")] Master master)
+        public ActionResult Edit([Bind(Include = "ID,Description,IsDeleted,CreatedByDateTime,ModifiedByDatetime")] Master master)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace Cleaningsupplies.Web.Controllers
             return View(master);
         }
 
-        // GET: Masters/Delete/5
+        // GET: Master/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace Cleaningsupplies.Web.Controllers
             return View(master);
         }
 
-        // POST: Masters/Delete/5
+        // POST: Master/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
