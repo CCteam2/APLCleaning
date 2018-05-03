@@ -12,7 +12,7 @@ namespace CleaningSupplies.Database.Models
         [Required]
         [Display(Name = "Created By")]
         public virtual ApplicationUser CreatedById { get; set; }
-        //[Required]
+        [Required]
         [Display(Name = "Created By DateTime")]
         public DateTime CreatedByDateTime { get; set; }
         //[Required]
@@ -20,6 +20,6 @@ namespace CleaningSupplies.Database.Models
         public virtual ApplicationUser ModifiedById { get; set; }
         //[Required]
         [Display(Name = "Modified By Datetime")]
-        public DateTime ModifiedByDatetime { get; set; }
+        public DateTime? ModifiedByDatetime { get; set; }
     }
 }

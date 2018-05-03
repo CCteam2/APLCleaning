@@ -13,12 +13,7 @@ namespace CleaningSupplies.Database.Models
         public int ID { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
-        [Display(Name = "Quantity In Stock")]
-        public int QuantityInStock { get; set; }
-        [Display(Name = "Disconnected")]
+        [Display(Name = "Discontinue")]
         public bool IsDeleted { get; set; }
-
-
     }
 }
