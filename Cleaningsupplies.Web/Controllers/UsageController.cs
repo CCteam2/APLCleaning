@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Cleaningsupplies.Web.Models;
 using CleaningSupplies.Database.Models;
 using Microsoft.AspNet.Identity;
 
@@ -16,134 +15,81 @@ namespace Cleaningsupplies.Web.Controllers
     public class UsageController : Controller
     {
 
-
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Usage
+        //
+        // GET: /CleaningUsage/
+
         public ActionResult Index()
         {
-            var result = from m in db.Master
-            select m;
+            //List<UsageModel> items = UsageModel.GetItems();
 
-            return View(result.ToList());
+            var items = (from m in db.Master select m).ToList();
 
-            //return View(db.Usage.ToList());
+            return View(items);
+
         }
 
-        // GET: Usage/Details/5
-        public ActionResult Details(int? id)
+        public JsonResult JsonUpdate(UpdateUsage model)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usage Usage = db.Usage.Find(id);
-            if (Usage == null)
-            {
-                return HttpNotFound();
-            }
-            return View(Usage);
-        }
+            string message = "Update Successful";
 
-        // GET: Usage/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Usage/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        public ActionResult Create([Bind(Include = "ID,Item,Quantity_modified,CreatedByDateTime,ModifiedByDatetime")] Usage Usage)
-        {
-            ModelState["CreatedById"].Errors.Clear();
-            if (ModelState.IsValid)
+            if (model.Quantity_modified == 0)
             {
-                Usage.CreatedById = db.Users.Find(User.Identity.GetUserId());  //Requires "using Microsoft.AspNet.Identity;"
-                Usage.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                Usage.CreatedByDateTime = DateTime.UtcNow;
-                Usage.ModifiedByDatetime = DateTime.UtcNow;
-                db.Usage.Add(Usage);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                message = "No Update - Qty is Zero";
+                return Json(message, JsonRequestBehavior.AllowGet);
             }
 
-            return View(Usage);
-        }
+            var userID = db.Users.Find(User.Identity.GetUserId());
 
-        // GET: Usage/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+            Master master = db.Master.Find(model.ID);
+
+            if (master == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                message = "Update Failed";
+
+                return Json(message, JsonRequestBehavior.AllowGet);
             }
-            Usage Usage = db.Usage.Find(id);
-            if (Usage == null)
+
+            Usage usage = new Usage
             {
-                return HttpNotFound();
-            }
-            return View(Usage);
-        }
+                Item = model.Description,
+                Quantity_modified = model.Quantity_modified,
+                CreatedByDateTime = DateTime.Now,
+                CreatedById = userID,
+                ModifiedByDatetime = DateTime.Now,
+                ModifiedById = userID,
+                GetMasterT = db.Master.Find(model.ID)
+            };
 
-        // POST: Usage/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Description,QuantityInStock,IsDeleted,CreatedById,CreatedByDateTime,ModifiedByDatetime")] Usage Usage)
-        {
-            ModelState["CreatedById"].Errors.Clear();
+            db.Entry(usage).State = EntityState.Added;
 
-            if (ModelState.IsValid)
-            {
-                Usage.CreatedById = db.Users.Find(User.Identity.GetUserId());  //Requires "using Microsoft.AspNet.Identity;"
-                Usage.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                Usage.ModifiedByDatetime = DateTime.UtcNow;
-
-                db.Entry(Usage).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(Usage);
-        }
-
-        // GET: Usage/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usage Usage = db.Usage.Find(id);
-            if (Usage == null)
-            {
-                return HttpNotFound();
-            }
-            return View(Usage);
-        }
-
-        // POST: Usage/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Usage Usage = db.Usage.Find(id);
-            db.Usage.Remove(Usage);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            if (model.Quantity_modified < 0)
+            {
+                message = "Update Successful - Qty of " + model.Quantity_modified + "Added";
+            }
+            else if (model.Quantity_modified > 0)
+            {
+                message = "Update Successful - Qty of " + model.Quantity_modified + "Removed";
+            }
+
+            ////compute quantity at hand. Alert user if qty at hand equals or less than alert qty
+            //int qtyOnHand = QueryMethods.SumProductInventoryQuantityForId(model.ID);
+
+            //if (qtyOnHand <= model.AlertThreshHold)
+            //    message = "Update Successful & Alert ThreshHold Met";
+            //else
+            //if (model.Quantity_modified < 0) 
+            //    message = "Update Successful - Qty of " + model.Quantity_modified + "Added";
+            //else
+            //if (model.Quantity_modified > 0)
+            //    message = "Update Successful - Qty of " + model.Quantity_modified + "Removed";
+
+            return Json(message, JsonRequestBehavior.AllowGet);
+
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
