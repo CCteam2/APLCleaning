@@ -36,7 +36,7 @@ namespace Cleaningsupplies.Web.Controllers
 
             if (model.Quantity_modified == 0)
             {
-                message = "No Update - Quantity is Zero";
+                message = "No Update - Qty is Zero";
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
 
@@ -68,11 +68,11 @@ namespace Cleaningsupplies.Web.Controllers
 
             if (model.Quantity_modified < 0)
             {
-                message = "Update Successful - Quantity of " + model.Quantity_modified + "Added";
+                message = "Update Successful - Qty of " + model.Quantity_modified + "Added";
             }
             else if (model.Quantity_modified > 0)
             {
-                message = "Update Successful - Quantity of " + model.Quantity_modified + "Removed";
+                message = "Update Successful - Qty of " + model.Quantity_modified + "Removed";
             }
 
             ////compute quantity at hand. Alert user if qty at hand equals or less than alert qty
@@ -82,10 +82,10 @@ namespace Cleaningsupplies.Web.Controllers
             //    message = "Update Successful & Alert ThreshHold Met";
             //else
             //if (model.Quantity_modified < 0) 
-            //    message = "Update Successful - Quantity of " + model.Quantity_modified + "Added";
+            //    message = "Update Successful - Qty of " + model.Quantity_modified + "Added";
             //else
             //if (model.Quantity_modified > 0)
-            //    message = "Update Successful - Quantity of " + model.Quantity_modified + "Removed";
+            //    message = "Update Successful - Qty of " + model.Quantity_modified + "Removed";
 
             return Json(message, JsonRequestBehavior.AllowGet);
 
