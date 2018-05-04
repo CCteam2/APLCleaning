@@ -1,16 +1,15 @@
-﻿@model CleaningSupplies.Database.Models.Master
+﻿@model IEnumerable<CleaningSupplies.Database.Models.Master>
 
 @{
     ViewBag.Title = "Report";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Report</h2>
 
 
-@Html.BeginForm())
+@using (Html.BeginForm())
 {
-    @*@Html.AntiForgeryToken()*@
+    @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <h4>Master</h4>
