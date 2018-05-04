@@ -1,4 +1,4 @@
-﻿@model CleaningSupplies.Database.Models.Master
+﻿@*@model CleaningSupplies.Database.Models.Master
 
 @{
     ViewBag.Title = "Details";
@@ -11,25 +11,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedById)
+            @Html.DisplayNameFor(model => model.IsDeleted)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatedById.Email)
+            @Html.DisplayFor(model => model.IsDeleted)
         </dd>
 
         <dt>
@@ -40,13 +34,6 @@
             @Html.DisplayFor(model => model.CreatedByDateTime)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedById)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedById.Email)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ModifiedByDatetime)
         </dt>
@@ -60,4 +47,4 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@

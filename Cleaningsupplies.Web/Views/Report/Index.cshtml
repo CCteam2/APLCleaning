@@ -6,9 +6,9 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -18,15 +18,20 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
 
-        @*<th>
+        
+
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedById)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CreatedByDateTime)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.ModifiedById)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.ModifiedByDatetime)
-        </th>*@
-        <th></th>
-        <th></th>
-        <th></th>
+        </th>
         <th></th>
     </tr>
 
@@ -39,22 +44,22 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.HiddenFor(modelItem => item.CreatedByDateTime)
+            @Html.DisplayFor(modelItem => item.CreatedById.Email)
         </td>
         <td>
-            @Html.HiddenFor(modelItem => item.ModifiedByDatetime)
+            @Html.DisplayFor(modelItem => item.CreatedByDateTime)
         </td>
         <td>
-            @Html.HiddenFor(modelItem => item.CreatedById)
+            @Html.DisplayFor(modelItem => item.ModifiedById.Email)
         </td>
         <td>
-            @Html.HiddenFor(modelItem => item.ModifiedById)
+            @Html.DisplayFor(modelItem => item.ModifiedByDatetime)
         </td>
-        <td>
+        @*<td>
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID })
-            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-        </td>
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>*@
     </tr>
 }
 
