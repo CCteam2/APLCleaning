@@ -25,20 +25,24 @@ namespace Cleaningsupplies.Web.Controllers
             //List<UsageModel> items = UsageModel.GetItems();
 
             // query product (master)
+            List<UsageVM> ListVM = new List<UsageVM>();
+
             var masters = (from m in db.Master select m).ToList();
 
             foreach (Master m in masters)
             {
-               
+                UsageVM vm = new UsageVM
+                {
+                    ID = m.ID,
+                    Description = m.Description,
+                    QuantityInStock = SumProdInvQty.GetSum(m.ID),
+                    Quantity_modified = 0
+                };
+
+                ListVM.Add(vm);
             }
 
-            return View(masters);
-
-            //var results = (from m in db.Master
-            //               join u in db.Usage on m.ID equals u.GetMasterT into product_inventory
-            //               select new {m.ID, m.Description, u.});
-
-            //return results.ToList();
+            return View(ListVM);
 
         }
 
@@ -87,17 +91,6 @@ namespace Cleaningsupplies.Web.Controllers
                 message = "Update Successful - Qty of " + model.Quantity_modified + " Removed";
             }
 
-            ////compute quantity at hand. Alert user if qty at hand equals or less than alert qty
-            //int qtyOnHand = QueryMethods.SumProductInventoryQuantityForId(model.ID);
-
-            //if (qtyOnHand <= model.AlertThreshHold)
-            //    message = "Update Successful & Alert ThreshHold Met";
-            //else
-            //if (model.Quantity_modified > 0) 
-            //    message = "Update Successful - Qty of " + model.Quantity_modified + " Added";
-            //else
-            //if (model.Quantity_modified < 0)
-            //    message = "Update Successful - Qty of " + model.Quantity_modified + " Removed";
 
             return Json(message, JsonRequestBehavior.AllowGet);
 
