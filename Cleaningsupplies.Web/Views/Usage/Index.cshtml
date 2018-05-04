@@ -30,7 +30,8 @@
         font-family: Arial,Helvetica,sans-serif;
         font-size: 14px;
         font-weight: normal;
-        width: 900px;
+        /*width: 900px;*/
+        overflow-x: auto;
         display: table;
         border-collapse: collapse;
         border: solid 1px #C5C5C5;
@@ -62,15 +63,19 @@
     }
 
     .col1Width {
-        width: 50px;
+        width: 5%;
     }
 
     .col2Width {
-        width: 200px;
+        width: 60%;
     }
 
     .col3Width {
-        width: 200px;
+        width: 10%;
+    }
+
+    .col4Width {
+        width: 25%;
         text-align: center;
     }
 </style>
@@ -102,7 +107,7 @@
                 {
                     "ID": ID,
                     "Description": Description,
-                    //"QuantityInStock": QuantityInStock,
+                    "QuantityInStock": QuantityInStock,
                     "Quantity_modified": Quantity_modified
                 };
             $.ajax({
@@ -132,7 +137,7 @@
                 {
                     "ID": ID,
                     "Description": Description,
-                   // "QuantityInStock": QuantityInStock,
+                    "QuantityInStock": QuantityInStock,
                     "Quantity_modified": Quantity_modified
                 };
             $.ajax({
@@ -159,33 +164,33 @@
 
 
 <div id="gridContent" style=" padding:20px; ">
-    @grid.GetHtml(
-                                        tableStyle: "webgrid-table",
-                                        headerStyle: "webgrid-header",
-                                        footerStyle: "webgrid-footer",
-                                        alternatingRowStyle: "webgrid-alternating-row",
-                                        selectedRowStyle: "webgrid-selected-row",
-                                        rowStyle: "webgrid-row-style",
-                                        mode: WebGridPagerModes.All,
-                                        columns:
-                                    grid.Columns(
-                                        grid.Column("ID", "ID", format: @<text>
-                                            <span><label id="ID">@item.ID</label></span>
-                                        </text>, style: "col1Width", canSort: false),
-                                                                                grid.Column("Description", "Description", format: @<text>
-                                                                                    <span><label id="lblDescription">@item.Description</label></span>
-                                                                                </text>, style: "col2Width", canSort: true),
-                                                                                                                         @*grid.Column("QuantityInStock", "Qty In Stock", format: @<text>
-                                                                                                                            <span><label id="lblQuanityInStock">@item.QuantityInStock</label></span>
-                                                                                                                        </text>, style: "col2Width", canSort: false),*@
-                                                                                                                                                                 grid.Column("Action", format: @<text>
-                                                                                                                                                                    <input type="text" id="Quantity_modified" class="edit-mode" value="0" size="3" />
-                                                                                                                                                                    <button class="edit-item display-mode">Edit</button>
-                                                                                                                                                                    <button class="cancel-item edit-mode">Cancel</button>
-                                                                                                                                                                    <button class="add-qty edit-mode">Add</button>
-                                                                                                                                                                    <button class="remove-qty edit-mode">Remove</button>
-                                                                                                                                                                </text>, style: "col3Width", canSort: false)
-                                                                                                                                                                                                     ))
+@grid.GetHtml(
+tableStyle: "webgrid-table",
+headerStyle: "webgrid-header",
+footerStyle: "webgrid-footer",
+alternatingRowStyle: "webgrid-alternating-row",
+selectedRowStyle: "webgrid-selected-row",
+rowStyle: "webgrid-row-style",
+mode: WebGridPagerModes.All,
+columns:
+grid.Columns(
+grid.Column("ID", "ID", format: @<text>
+<span><label id="ID">@item.ID</label></span>
+</text>, style: "col1Width", canSort: false),
+grid.Column("Description", "Description", format: @<text>
+<span><label id="lblDescription">@item.Description</label></span>
+</text>, style: "col2Width", canSort: true),
+grid.Column("QuantityInStock", "Qty In Stock", format: @<text>
+<span><label id="lblQuanityInStock">0</label></span>
+</text>, style: "col3Width", canSort: false),
+grid.Column("Action", format: @<text>
+<input type="text" id="Quantity_modified" class="edit-mode" value="0" size="3" />
+<button class="edit-item display-mode">Edit</button>
+<button class="cancel-item edit-mode">Cancel</button>
+<button class="add-qty edit-mode">Add</button>
+<button class="remove-qty edit-mode">Remove</button>
+</text>, style: "col4Width", canSort: false)
+))
 </div>
 <div>
     @Html.ActionLink("Back to Products", "Index", "Master")

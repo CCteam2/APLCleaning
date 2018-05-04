@@ -24,13 +24,25 @@ namespace Cleaningsupplies.Web.Controllers
         {
             //List<UsageModel> items = UsageModel.GetItems();
 
-            var items = (from m in db.Master select m).ToList();
+            // query product (master)
+            var masters = (from m in db.Master select m).ToList();
 
-            return View(items);
+            foreach (Master m in masters)
+            {
+               
+            }
+
+            return View(masters);
+
+            //var results = (from m in db.Master
+            //               join u in db.Usage on m.ID equals u.GetMasterT into product_inventory
+            //               select new {m.ID, m.Description, u.});
+
+            //return results.ToList();
 
         }
 
-        public JsonResult JsonUpdate(UpdateUsage model)
+        public JsonResult JsonUpdate(UsageVM model)
         {
             string message = "Update Successful";
 
@@ -66,13 +78,13 @@ namespace Cleaningsupplies.Web.Controllers
 
             db.SaveChanges();
 
-            if (model.Quantity_modified < 0)
+            if (model.Quantity_modified > 0)
             {
-                message = "Update Successful - Qty of " + model.Quantity_modified + "Added";
+                message = "Update Successful - Qty of " + model.Quantity_modified + " Added";
             }
-            else if (model.Quantity_modified > 0)
+            else if (model.Quantity_modified < 0)
             {
-                message = "Update Successful - Qty of " + model.Quantity_modified + "Removed";
+                message = "Update Successful - Qty of " + model.Quantity_modified + " Removed";
             }
 
             ////compute quantity at hand. Alert user if qty at hand equals or less than alert qty
@@ -81,11 +93,11 @@ namespace Cleaningsupplies.Web.Controllers
             //if (qtyOnHand <= model.AlertThreshHold)
             //    message = "Update Successful & Alert ThreshHold Met";
             //else
-            //if (model.Quantity_modified < 0) 
-            //    message = "Update Successful - Qty of " + model.Quantity_modified + "Added";
+            //if (model.Quantity_modified > 0) 
+            //    message = "Update Successful - Qty of " + model.Quantity_modified + " Added";
             //else
-            //if (model.Quantity_modified > 0)
-            //    message = "Update Successful - Qty of " + model.Quantity_modified + "Removed";
+            //if (model.Quantity_modified < 0)
+            //    message = "Update Successful - Qty of " + model.Quantity_modified + " Removed";
 
             return Json(message, JsonRequestBehavior.AllowGet);
 
