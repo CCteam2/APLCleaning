@@ -1411,6 +1411,8 @@ table {
 
 th {
   text-align: left;
+  background-color: #b6391e;
+  color: white;
 }
 
 .table {
