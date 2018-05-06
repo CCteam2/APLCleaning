@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Cleaningsupplies.Business.Classes;
 using Cleaningsupplies.Web.Models;
 using CleaningSupplies.Database.Models;
 using Microsoft.AspNet.Identity;
@@ -22,20 +23,34 @@ namespace Cleaningsupplies.Web.Controllers
 
         public ActionResult Index()
         {
-            //List<UsageModel> items = UsageModel.GetItems();
+            //check for temp data message passed
+            if (TempData.ContainsKey("message") && TempData["message"] != null)
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
+            else
+            {
+                ViewBag.message = "";
+            }
 
-            // query product (master)
+            // create Usage View Model
             List<UsageVM> ListVM = new List<UsageVM>();
 
+            // query Master creating Master List
             var masters = (from m in db.Master select m).ToList();
 
+            // for each Master in the List:
+            //  - create a Usage View Model object
+            //  - populate this object with data from Master
+            //  - summarize usage quantity modified 
+            //  - add Usage View Model to List
             foreach (Master m in masters)
             {
                 UsageVM vm = new UsageVM
                 {
                     ID = m.ID,
                     Description = m.Description,
-                    QuantityInStock = SumProdInvQty.GetSum(m.ID),
+                    QuantityInStock = QueryMethods.GetProdInvSum(m.ID),
                     Quantity_modified = 0
                 };
 
@@ -48,7 +63,8 @@ namespace Cleaningsupplies.Web.Controllers
 
         public JsonResult JsonUpdate(UsageVM model)
         {
-            string message = "Update Successful";
+            string message = null;
+            TempData["message"] = null;
 
             if (model.Quantity_modified == 0)
             {
@@ -82,19 +98,34 @@ namespace Cleaningsupplies.Web.Controllers
 
             db.SaveChanges();
 
-            if (model.Quantity_modified > 0)
+            //if (model.Quantity_modified > 0)
+            //{
+            //    message = "Update Successful - Qty of " + model.Quantity_modified + " Added";
+            //}
+            //else if (model.Quantity_modified < 0)
+            //{
+            //    message = "Update Successful - Qty of " + model.Quantity_modified * -1 + " Removed";
+            //}
+
+            ////compute quantity on hand. Alert user if qty on hand equals or less than alert qty
+            //int qtyOnHand = QueryMethods.GetProdInvSum(m.ID);
+
+            //if (qtyOnHand <= master.MinThreshold
+            //    message = "Update Successful & Alert ThreshHold Met";
+
+            if (message != null)
             {
-                message = "Update Successful - Qty of " + model.Quantity_modified + " Added";
+                return Json(message, JsonRequestBehavior.AllowGet);
             }
-            else if (model.Quantity_modified < 0)
+            else
             {
-                message = "Update Successful - Qty of " + model.Quantity_modified + " Removed";
+                TempData["message"] = "Update Successful";
+                return Json(new
+                {
+                    redirectUrl = Url.Action("Index", "Usage"),
+                    isRedirect = true
+                });
             }
-
-
-            return Json(message, JsonRequestBehavior.AllowGet);
-
         }
-
     }
 }
