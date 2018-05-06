@@ -107,6 +107,12 @@ namespace Cleaningsupplies.Web.Controllers
             return View(master);
         }
 
+        public ActionResult Notes()
+        {
+            return View();
+        }
+
+
         // GET: Master/Delete/5
         public ActionResult Delete(int? id)
         {
