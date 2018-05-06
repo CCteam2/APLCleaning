@@ -7,128 +7,110 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CleaningSupplies.Database.Models;
-using Microsoft.AspNet.Identity;
-
 
 namespace Cleaningsupplies.Web.Controllers
 {
-    [Authorize]
-    public class MasterController : Controller
+    public class ReportController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Master
+        // GET: Report
         public ActionResult Index()
         {
-            return View(db.Master.ToList());
+            return View(db.Usage.ToList());
         }
 
-        public ActionResult Report()
-        {
-            return View(db.Master.ToList());
-        }
-
-        // GET: Master/Details/5
+        // GET: Report/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Master master = db.Master.Find(id);
-            if (master == null)
+            Usage usage = db.Usage.Find(id);
+            if (usage == null)
             {
                 return HttpNotFound();
             }
-            return View(master);
+            return View(usage);
         }
 
-        // GET: Master/Create
+        // GET: Report/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Master/Create
+        // POST: Report/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,IsDeleted,MinimumValue,CreatedByDateTime,ModifiedByDatetime")] Master master)
+        public ActionResult Create([Bind(Include = "ID,Item,Quantity_modified,CreatedByDateTime,ModifiedByDatetime")] Usage usage)
         {
-            ModelState["CreatedById"].Errors.Clear();
             if (ModelState.IsValid)
             {
-                master.CreatedById = db.Users.Find(User.Identity.GetUserId()); //Requires "using Microsoft.AspNet.Identity;"
-                //master.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                master.CreatedByDateTime = DateTime.Now;
-                //master.ModifiedByDatetime = DateTime.Now;
-                db.Master.Add(master);
+                db.Usage.Add(usage);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(master);
+            return View(usage);
         }
 
-        // GET: Master/Edit/5
+        // GET: Report/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Master master = db.Master.Find(id);
-            if (master == null)
+            Usage usage = db.Usage.Find(id);
+            if (usage == null)
             {
                 return HttpNotFound();
             }
-            return View(master);
+            return View(usage);
         }
 
-        // POST: Master/Edit/5
+        // POST: Report/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Master master)
+        public ActionResult Edit([Bind(Include = "ID,Item,Quantity_modified,CreatedByDateTime,ModifiedByDatetime")] Usage usage)
         {
-            //var errors = ViewData.ModelState.Values.Where(X => X.Errors.Count >= 1).ToList();
-            
             if (ModelState.IsValid)
             {
-                //master.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                master.ModifiedByDatetime = DateTime.Now;
-
-                db.Entry(master).State = EntityState.Modified;
+                db.Entry(usage).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(master);
+            return View(usage);
         }
 
-        // GET: Master/Delete/5
+        // GET: Report/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Master master = db.Master.Find(id);
-            if (master == null)
+            Usage usage = db.Usage.Find(id);
+            if (usage == null)
             {
                 return HttpNotFound();
             }
-            return View(master);
+            return View(usage);
         }
 
-        // POST: Master/Delete/5
+        // POST: Report/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Master master = db.Master.Find(id);
-            db.Master.Remove(master);
+            Usage usage = db.Usage.Find(id);
+            db.Usage.Remove(usage);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
