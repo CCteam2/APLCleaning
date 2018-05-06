@@ -15,6 +15,9 @@ namespace CleaningSupplies.Database.Models
         public string Description { get; set; }
         [Display(Name = "Discontinue")]
         public bool IsDeleted { get; set; }
+        [Display(Name = "Min Threshold")]
+        public int MinimumValue { get; set; }
+        public string Notes { get; set; }
 
     }
 }

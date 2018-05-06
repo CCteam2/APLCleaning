@@ -54,7 +54,7 @@ namespace Cleaningsupplies.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,IsDeleted,CreatedByDateTime,ModifiedByDatetime")] Master master)
+        public ActionResult Create([Bind(Include = "ID,Description,IsDeleted,MinimumValue,CreatedByDateTime,ModifiedByDatetime")] Master master)
         {
             ModelState["CreatedById"].Errors.Clear();
             if (ModelState.IsValid)
@@ -106,6 +106,12 @@ namespace Cleaningsupplies.Web.Controllers
             }
             return View(master);
         }
+
+        public ActionResult Notes()
+        {
+            return View();
+        }
+
 
         // GET: Master/Delete/5
         public ActionResult Delete(int? id)

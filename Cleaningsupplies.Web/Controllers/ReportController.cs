@@ -17,7 +17,7 @@ namespace Cleaningsupplies.Web.Controllers
         // GET: Report
         public ActionResult Index()
         {
-            return View(db.Master.ToList());
+            return View(db.Usage.ToList());
         }
 
         // GET: Report/Details/5
@@ -27,12 +27,12 @@ namespace Cleaningsupplies.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Master master = db.Master.Find(id);
-            if (master == null)
+            Usage usage = db.Usage.Find(id);
+            if (usage == null)
             {
                 return HttpNotFound();
             }
-            return View(master);
+            return View(usage);
         }
 
         // GET: Report/Create
@@ -46,16 +46,16 @@ namespace Cleaningsupplies.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,IsDeleted,CreatedByDateTime,ModifiedByDatetime")] Master master)
+        public ActionResult Create([Bind(Include = "ID,Item,Quantity_modified,CreatedByDateTime,ModifiedByDatetime")] Usage usage)
         {
             if (ModelState.IsValid)
             {
-                db.Master.Add(master);
+                db.Usage.Add(usage);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(master);
+            return View(usage);
         }
 
         // GET: Report/Edit/5
@@ -65,12 +65,12 @@ namespace Cleaningsupplies.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Master master = db.Master.Find(id);
-            if (master == null)
+            Usage usage = db.Usage.Find(id);
+            if (usage == null)
             {
                 return HttpNotFound();
             }
-            return View(master);
+            return View(usage);
         }
 
         // POST: Report/Edit/5
@@ -78,15 +78,15 @@ namespace Cleaningsupplies.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Description,IsDeleted,CreatedByDateTime,ModifiedByDatetime")] Master master)
+        public ActionResult Edit([Bind(Include = "ID,Item,Quantity_modified,CreatedByDateTime,ModifiedByDatetime")] Usage usage)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(master).State = EntityState.Modified;
+                db.Entry(usage).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(master);
+            return View(usage);
         }
 
         // GET: Report/Delete/5
@@ -96,12 +96,12 @@ namespace Cleaningsupplies.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Master master = db.Master.Find(id);
-            if (master == null)
+            Usage usage = db.Usage.Find(id);
+            if (usage == null)
             {
                 return HttpNotFound();
             }
-            return View(master);
+            return View(usage);
         }
 
         // POST: Report/Delete/5
@@ -109,8 +109,8 @@ namespace Cleaningsupplies.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Master master = db.Master.Find(id);
-            db.Master.Remove(master);
+            Usage usage = db.Usage.Find(id);
+            db.Usage.Remove(usage);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
