@@ -107,12 +107,9 @@ namespace Cleaningsupplies.Web.Controllers
             return View(master);
         }
 
-        public ActionResult Notes(Master master)
+        public ActionResult Notes()
         {
-            db.Entry(master).State = EntityState.Modified;
-            //db.SaveChanges();
             return View();
-           
         }
 
 
