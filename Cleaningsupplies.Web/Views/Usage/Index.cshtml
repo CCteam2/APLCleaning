@@ -14,8 +14,8 @@
     .edit-usg {
     }
 
-        .edit-usg display-mode {
-        }
+    .edit-usg display-mode {
+    }
 
     .add-usg edit-mode {
     }
@@ -80,8 +80,18 @@
         text-align: center;
     }
 
-    th:first-child{
+    th:first-child {
         display: none;
+    }
+
+    .message {
+        color: mediumseagreen;
+        font-size: medium;
+    }
+
+    .alert {
+        color: red;
+        font-size: medium;
     }
 
 </style>
@@ -122,7 +132,10 @@
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    alert(data);
+                    if (data.isRedirect) {
+                        window.location.href = data.redirectUrl;
+                    }
+                    else { alert(data);}
                 }
             });
             // reset user input to 0
@@ -152,7 +165,12 @@
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    alert(data);
+                    if (data.isRedirect) {
+                        window.location.href = data.redirectUrl;
+                    }
+                    else {
+                        alert(data);
+                    }
                 }
             });
             // reset user input to 0
@@ -162,10 +180,10 @@
 </script>
 
 <h2>Usage</h2>
-
+<p><span class="message">@ViewBag.message</span><span class="alert">@ViewBag.parm</span></p>
 
 @{
-    var grid = new WebGrid(Model, rowsPerPage: 7, canPage: true, canSort: true);
+    var grid = new WebGrid(Model, rowsPerPage: 10, canPage: true, canSort: true);
 }
 
 

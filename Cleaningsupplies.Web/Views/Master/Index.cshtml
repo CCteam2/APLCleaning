@@ -18,14 +18,15 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Notes)
+            @Html.DisplayNameFor(model => model.MinimumValue)
         </th>
 
-
-
+        @*<th>
+            @Html.DisplayNameFor(model => model.CreatedByDateTime)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedByDatetime)
-        </th>
+        </th>*@
         <th></th>
         <th></th>
         <th></th>
@@ -33,35 +34,35 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.HiddenFor(modelItem => item.CreatedByDateTime)
-            </td>
-            <td>
-                @Html.HiddenFor(modelItem => item.ModifiedByDatetime)
-            </td>
-            <td>
-                @Html.HiddenFor(modelItem => item.CreatedById)
-            </td>
-            <td>
-                @Html.HiddenFor(modelItem => item.ModifiedById)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) 
-                @Html.ActionLink("Details", "Details", new { id = item.ID })
-                @Html.ActionLink("Notes", "Notes", new { id = item.ID})
-                @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinimumValue)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.CreatedByDateTime)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.ModifiedByDatetime)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.CreatedById)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.ModifiedById)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID })
+            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+        </td>
+    </tr>
+}
 
 </table>
-

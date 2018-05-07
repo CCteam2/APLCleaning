@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Cleaningsupplies.Business.Classes;
 using Cleaningsupplies.Web.Models;
 using CleaningSupplies.Database.Models;
 using Microsoft.AspNet.Identity;
@@ -11,10 +12,8 @@ using Microsoft.AspNet.Identity;
 namespace Cleaningsupplies.Web.Controllers
 {
     [Authorize]
-
     public class UsageController : Controller
     {
-
         private ApplicationDbContext db = new ApplicationDbContext();
 
         //
@@ -22,20 +21,36 @@ namespace Cleaningsupplies.Web.Controllers
 
         public ActionResult Index()
         {
-            //List<UsageModel> items = UsageModel.GetItems();
+            //check for temp data message passed
+            if (TempData.ContainsKey("message") && TempData["message"] != null)
+            {
+                ViewBag.message = TempData["message"].ToString();
+                ViewBag.parm = TempData["parm"].ToString();
+            }
+            else
+            {
+                ViewBag.message = null;
+                ViewBag.parm = null;
+            }
 
-            // query product (master)
+            // create Usage View Model
             List<UsageVM> ListVM = new List<UsageVM>();
 
+            // query Master creating Master List
             var masters = (from m in db.Master select m).ToList();
 
+            // for each Master in the List:
+            //  - create a Usage View Model object
+            //  - populate this object with data from Master
+            //  - summarize usage quantity modified 
+            //  - add Usage View Model to List
             foreach (Master m in masters)
             {
                 UsageVM vm = new UsageVM
                 {
                     ID = m.ID,
                     Description = m.Description,
-                    QuantityInStock = SumProdInvQty.GetSum(m.ID),
+                    QuantityInStock = QueryMethods.GetProdInvSum(m.ID),
                     Quantity_modified = 0
                 };
 
@@ -48,24 +63,39 @@ namespace Cleaningsupplies.Web.Controllers
 
         public JsonResult JsonUpdate(UsageVM model)
         {
-            string message = "Update Successful";
+            string message = null;
+            string parm = null;
+
+            TempData["message"] = null;
+            TempData["parm"] = null;
 
             if (model.Quantity_modified == 0)
             {
-                message = "No Update - Qty is Zero";
+                message = "No Update: Qty is Zero";
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
-
-            var userID = db.Users.Find(User.Identity.GetUserId());
 
             Master master = db.Master.Find(model.ID);
 
             if (master == null)
             {
-                message = "Update Failed";
+                message = "Update Failed: Contact System Administrator";
 
                 return Json(message, JsonRequestBehavior.AllowGet);
             }
+
+            //compute the quantity on hand before update
+            //if qty on hand + qty modified is less than 0, qty will go below zero
+            int qtyOnHand = QueryMethods.GetProdInvSum(master.ID);
+
+            if (qtyOnHand + model.Quantity_modified < 0)
+            {
+                message = "No Update: Qty In Stock Will Go Below Zero";
+
+                return Json(message, JsonRequestBehavior.AllowGet);
+            }
+
+            var userID = db.Users.Find(User.Identity.GetUserId());
 
             Usage usage = new Usage
             {
@@ -82,19 +112,27 @@ namespace Cleaningsupplies.Web.Controllers
 
             db.SaveChanges();
 
-            if (model.Quantity_modified > 0)
+            //compute the quantity on hand after update
+            //if qty on hand is less than or equal to threshold, alert user
+            qtyOnHand = QueryMethods.GetProdInvSum(master.ID);
+            if (qtyOnHand <= master.MinimumValue)
             {
-                message = "Update Successful - Qty of " + model.Quantity_modified + " Added";
+                message = "Update Successful";
+                parm = "Alert Threshold Met";
             }
-            else if (model.Quantity_modified < 0)
+            else
             {
-                message = "Update Successful - Qty of " + model.Quantity_modified + " Removed";
+                message = "Update Successful";
+                parm = "";
             }
 
-
-            return Json(message, JsonRequestBehavior.AllowGet);
-
+            TempData["message"] = message;
+            TempData["parm"] = parm;
+            return Json(new
+            {
+                redirectUrl = Url.Action("Index", "Usage"),
+                isRedirect = true
+            });
         }
-
     }
 }

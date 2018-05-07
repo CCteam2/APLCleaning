@@ -91,9 +91,13 @@
     <Compile Include="Migrations\201805031756234_Initial.Designer.cs">
       <DependentUpon>201805031756234_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805041922209_add notes .cs" />
-    <Compile Include="Migrations\201805041922209_add notes .Designer.cs">
-      <DependentUpon>201805041922209_add notes .cs</DependentUpon>
+    <Compile Include="Migrations\201805061753406_Add-ThrsholdColumn.cs" />
+    <Compile Include="Migrations\201805061753406_Add-ThrsholdColumn.Designer.cs">
+      <DependentUpon>201805061753406_Add-ThrsholdColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805061856278_Add-NotesField.cs" />
+    <Compile Include="Migrations\201805061856278_Add-NotesField.Designer.cs">
+      <DependentUpon>201805061856278_Add-NotesField.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -114,8 +118,11 @@
     <EmbeddedResource Include="Migrations\201805031756234_Initial.resx">
       <DependentUpon>201805031756234_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805041922209_add notes .resx">
-      <DependentUpon>201805041922209_add notes .cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805061753406_Add-ThrsholdColumn.resx">
+      <DependentUpon>201805061753406_Add-ThrsholdColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805061856278_Add-NotesField.resx">
+      <DependentUpon>201805061856278_Add-NotesField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
