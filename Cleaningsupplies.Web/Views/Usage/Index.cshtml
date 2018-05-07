@@ -89,6 +89,11 @@
         font-size: medium;
     }
 
+    .alert {
+        color: red;
+        font-size: medium;
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -175,8 +180,7 @@
 </script>
 
 <h2>Usage</h2>
-
-<p class="message">@ViewBag.message</p>
+<p><span class="message">@ViewBag.message</span><span class="alert">@ViewBag.parm</span></p>
 
 @{
     var grid = new WebGrid(Model, rowsPerPage: 10, canPage: true, canSort: true);

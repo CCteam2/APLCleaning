@@ -56,8 +56,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ModifiedByDatetime)
             </td>
-           
+
         </tr>
     }
 
 </table>
+
+<button onclick="PrintFunction()" id="btn" class="btn">Print</button>
+<script>function PrintFunction() {
+       window.print();
+   }</script>
