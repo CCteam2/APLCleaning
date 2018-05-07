@@ -4,11 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Report</h2>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
 <table class="table">
     <tr>
         <th>
@@ -21,10 +18,10 @@
             @Html.DisplayNameFor(model => model.Quantity_modified)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedById)
+            @Html.DisplayNameFor(model => model.GetMasterT.CreatedById)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedByDateTime)
+            @Html.DisplayNameFor(model => model.GetMasterT.CreatedByDateTime)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedById)
@@ -48,10 +45,10 @@
                 @Html.DisplayFor(modelItem => item.Quantity_modified)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedById.Email)
+                @Html.DisplayFor(modelItem => item.GetMasterT.CreatedById.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedByDateTime)
+                @Html.DisplayFor(modelItem => item.GetMasterT.CreatedByDateTime)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ModifiedById.Email)
@@ -59,12 +56,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ModifiedByDatetime)
             </td>
-            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>*@
+
         </tr>
     }
 
 </table>
+
+<button onclick="PrintFunction()" id="btn" class="btn">Print</button>
+<script>function PrintFunction() {
+       window.print();
+   }</script>

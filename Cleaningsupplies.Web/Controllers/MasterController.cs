@@ -54,15 +54,13 @@ namespace Cleaningsupplies.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Description,IsDeleted,MinimumValue,CreatedByDateTime,ModifiedByDatetime")] Master master)
+        public ActionResult Create([Bind(Include = "ID,Description,IsDeleted,MinimumValue,CreatedByDateTime,ModifiedByDatetime,Notes")] Master master)
         {
             ModelState["CreatedById"].Errors.Clear();
             if (ModelState.IsValid)
             {
                 master.CreatedById = db.Users.Find(User.Identity.GetUserId()); //Requires "using Microsoft.AspNet.Identity;"
-                //master.ModifiedById = db.Users.Find(User.Identity.GetUserId());
                 master.CreatedByDateTime = DateTime.Now;
-                //master.ModifiedByDatetime = DateTime.Now;
                 db.Master.Add(master);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -97,9 +95,6 @@ namespace Cleaningsupplies.Web.Controllers
             
             if (ModelState.IsValid)
             {
-                //master.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                master.ModifiedByDatetime = DateTime.Now;
-
                 db.Entry(master).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
