@@ -24,6 +24,7 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.MinimumValue)
         </dt>
@@ -46,20 +47,12 @@
         <dd>
             @Html.DisplayFor(model => model.CreatedByDateTime)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.ModifiedById)
+            @Html.DisplayNameFor(model => model.Notes)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ModifiedById.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedByDatetime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedByDatetime)
+            @Html.DisplayFor(model => model.Notes)
         </dd>
 
     </dl>
