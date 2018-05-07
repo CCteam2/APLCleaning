@@ -10,7 +10,11 @@ using CleaningSupplies.Database.Models;
 
 namespace Cleaningsupplies.Web.Controllers
 {
+    [Authorize]
+
     public class ReportController : Controller
+
+
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
