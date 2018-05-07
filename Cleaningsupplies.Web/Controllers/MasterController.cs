@@ -60,9 +60,7 @@ namespace Cleaningsupplies.Web.Controllers
             if (ModelState.IsValid)
             {
                 master.CreatedById = db.Users.Find(User.Identity.GetUserId()); //Requires "using Microsoft.AspNet.Identity;"
-                //master.ModifiedById = db.Users.Find(User.Identity.GetUserId());
                 master.CreatedByDateTime = DateTime.Now;
-                //master.ModifiedByDatetime = DateTime.Now;
                 db.Master.Add(master);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -97,9 +95,6 @@ namespace Cleaningsupplies.Web.Controllers
             
             if (ModelState.IsValid)
             {
-                //master.ModifiedById = db.Users.Find(User.Identity.GetUserId());
-                master.ModifiedByDatetime = DateTime.Now;
-
                 db.Entry(master).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

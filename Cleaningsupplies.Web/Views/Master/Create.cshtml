@@ -21,7 +21,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter an item description" } })
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -29,7 +29,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control"} })
+            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control", placeholder = "Add notes" } })
             @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -38,7 +38,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.MinimumValue, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.MinimumValue, new { htmlAttributes = new { @class = "form-control", @Value = "1" } })
+            @Html.EditorFor(model => model.MinimumValue, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter minimum threshold" } })
             @Html.ValidationMessageFor(model => model.MinimumValue, "", new { @class = "text-danger" })
         </div>
     </div>
