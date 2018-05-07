@@ -107,8 +107,9 @@ namespace Cleaningsupplies.Web.Controllers
             //    message = "Update Successful - Qty of " + model.Quantity_modified * -1 + " Removed";
             //}
 
-            ////compute quantity on hand. Alert user if qty on hand equals or less than alert qty
-            //int qtyOnHand = QueryMethods.GetProdInvSum(m.ID);
+            //compute quantity on hand.
+            //alert the user if qty on hand is less than or equal to threshold qty
+            //int qtyOnHand = QueryMethods.GetProdInvSum(master.ID);
 
             //if (qtyOnHand <= master.MinThreshold
             //    message = "Update Successful & Alert ThreshHold Met";
